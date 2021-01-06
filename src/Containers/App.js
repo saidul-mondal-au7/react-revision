@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import Person from './Person/Person';
+import Persons from '../Persons/Persons';
+import Cockpit from '../Cockpit/Cockpit'
 import './App.css';
 
 class App extends Component {
@@ -56,44 +57,29 @@ class App extends Component {
   }
 
   render(){
-    const style = {
-      backgroundColor : "white",
-      font : "inherit",
-      border : "1px solid blue",
-      padding : "8px",
-      cursor : "pointer"
-    }
-
+  
     let persons = null;
 
     if (this.state.showPerson){
-      persons = (
-        this.state.persons.map((person, index)=>{
-          return <Person 
-          click={()=>this.deletePersonHandler(index)} 
-          changed={(event)=>this.onChangeHandler(event, person.id)}
-          name={person.name} 
-          age={person.age} 
-          key={person.id}
+      persons = ( <Persons 
+          clicked={this.deletePersonHandler} 
+          changed={this.onChangeHandler}
+          persons={this.state.persons}
+          
            />
-        })
-      )
-    }
+      )}
+      
 
     return (
-      <div className="App">
-        <h1>This is Rivision-REACT</h1>
-        <h2>let's crack the interview</h2>
-        <button 
-        style={style}
-        onClick={this.toggleHandler}
-        >Switch</button>
+      <div className='App'>
+        <Cockpit 
+        clicked={this.toggleHandler}
+        />
         {persons}
       </div>
     );
   }
-  
-}
+}  
 
 export default App;
 
